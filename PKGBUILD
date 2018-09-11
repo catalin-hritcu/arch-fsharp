@@ -15,6 +15,11 @@ _commit=3245fd24efcc7a54d4314a2897257f68cd194244  # tags/4.1.18
 source=("git+https://github.com/fsharp/fsharp/#commit=$_commit")
 sha256sums=('SKIP')
 
+prepare() {
+  cd "$srcdir/$pkgname"
+  patch -Np1 -i "../../type-annotation.patch"
+}
+
 pkgver() {
   cd $pkgname
   git describe --tags | sed 's/-/+/g'
